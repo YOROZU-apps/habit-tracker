@@ -1,0 +1,142 @@
+:root {
+  --bg: #fdf8f0;
+  --card: #ffffff;
+  --text: #3a3226;
+  --muted: #8a7f70;
+  --accent: #e07a3f;
+  --line: #eadfce;
+  --today: #fff1e0;
+  --selected: #fde3c8;
+  --stamp-check: #888780;
+  --stamp-star: #d85a30;
+  --stamp-crown: #ba7517;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+main { max-width: 640px; margin: 0 auto; padding: 16px; }
+header h1 { margin: 8px 0 4px; font-size: 1.5rem; }
+.sub { margin: 0 0 16px; color: var(--muted); font-size: 0.9rem; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+h2 { font-size: 1.1rem; margin: 0 0 12px; }
+.date { color: var(--muted); font-weight: normal; font-size: 0.8rem; display: block; margin-top: 2px; }
+button { font: inherit; }
+
+/* ---- メッセージ ---- */
+.message { position: relative; text-align: center; border-color: var(--accent); background: #fff8ef; }
+.message.milestone { border-width: 2px; padding: 24px 16px; animation: rise 0.5s ease-out; }
+.message-title { margin: 4px 24px 0; font-size: 1.15rem; font-weight: bold; }
+.message.milestone .message-title { font-size: 1.5rem; color: var(--stamp-star); }
+.message blockquote { margin: 16px 0 0; padding: 12px; border-top: 1px dashed var(--line); }
+.message blockquote p { margin: 0; font-size: 1rem; line-height: 1.7; }
+.message blockquote .quote-note { margin-top: 4px; color: var(--muted); font-size: 0.85rem; }
+.message cite { display: block; margin-top: 6px; color: var(--muted); font-size: 0.85rem; font-style: normal; }
+
+/* ---- お試しモード・警告・データ ---- */
+.demo { background: #eef6ea; border-color: #b9d6a8; font-size: 0.9rem; line-height: 1.7; }
+.demo a { color: #3b6d11; margin-left: 4px; white-space: nowrap; }
+.warning { background: #fdecea; border-color: #f2b8b5; color: #8a2b25; font-size: 0.9rem; }
+.data-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
+.data-actions button {
+  background: none; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; color: inherit;
+}
+.data-actions button:hover { border-color: var(--accent); }
+.hint a { color: var(--accent); }
+.close { position: absolute; top: 8px; right: 8px; background: none; border: none; color: var(--muted); cursor: pointer; }
+@keyframes rise {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ---- 継続日数 ---- */
+.streak { display: flex; align-items: baseline; gap: 6px; }
+.streak-num { font-size: 2.4rem; font-weight: bold; line-height: 1; color: var(--accent); }
+.streak-label { font-weight: bold; }
+.streak-best { color: var(--muted); font-size: 0.9rem; }
+
+/* ---- 日ごとの習慣 ---- */
+.day-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.link { background: none; border: none; color: var(--accent); cursor: pointer; padding: 0; text-decoration: underline; white-space: nowrap; }
+.day-stamp { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; min-height: 64px; }
+.day-stamp .stamp { width: 56px; }
+#day-stamp-name { font-weight: bold; }
+.note { margin: 0 0 8px; padding: 8px 10px; background: #f6f1e8; border-radius: 8px; color: var(--muted); font-size: 0.85rem; }
+
+#habit-list { list-style: none; padding: 0; margin: 0 0 12px; }
+#habit-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 4px; border-bottom: 1px dashed var(--line);
+}
+#habit-list label { flex: 1; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+#habit-list input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); }
+#habit-list .done span { text-decoration: line-through; color: var(--muted); }
+.del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; }
+.empty { color: var(--muted); font-size: 0.9rem; }
+
+#habit-form { display: flex; gap: 8px; }
+#habit-input { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; font-size: 1rem; }
+#habit-form button {
+  background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 8px 14px; cursor: pointer;
+}
+
+/* ---- カレンダー ---- */
+.cal-head { display: flex; align-items: center; justify-content: space-between; }
+.cal-head h2 { margin: 0; }
+.cal-head button {
+  background: none; border: 1px solid var(--line); border-radius: 8px;
+  width: 36px; height: 36px; cursor: pointer; font-size: 1.2rem;
+}
+.weekdays, .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.weekdays { margin: 12px 0 4px; text-align: center; font-size: 0.8rem; color: var(--muted); }
+.weekdays span:first-child { color: #d0574b; }
+.weekdays span:last-child { color: #4b7bd0; }
+.day {
+  aspect-ratio: 1; border: 1px solid var(--line); border-radius: 8px; background: none;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; font-size: 0.75rem; padding: 0; color: inherit;
+}
+button.day { cursor: pointer; }
+button.day:hover { border-color: var(--accent); }
+.day:disabled { cursor: default; opacity: 0.45; }
+.day .num { position: absolute; top: 3px; left: 5px; color: var(--muted); }
+.day.today { background: var(--today); border-color: var(--accent); }
+.day.selected { background: var(--selected); border: 2px solid var(--accent); }
+.day.blank { border: none; }
+.day .stamp { width: 52%; margin-top: 8px; }
+.summary { margin: 12px 0 0; color: var(--muted); font-size: 0.9rem; }
+.hint { margin: 4px 0 0; color: var(--muted); font-size: 0.8rem; }
+
+/* ---- スタンプ（丸枠＋アイコン、判子風に少し傾ける） ---- */
+.stamp {
+  display: inline-flex; align-items: center; justify-content: center;
+  aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid currentColor;
+  transform: rotate(-8deg);
+  flex-shrink: 0;
+}
+.stamp svg { width: 62%; height: 62%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.stamp-check { color: var(--stamp-check); }
+.stamp-star { color: var(--stamp-star); }
+.stamp-crown { color: var(--stamp-crown); outline: 2px solid currentColor; outline-offset: 2px; }
+.day .stamp-crown { outline-width: 1.5px; outline-offset: 1.5px; }
+.stamp.pop { animation: pop 0.45s ease-out; }
+@keyframes pop {
+  0% { transform: scale(0.2) rotate(-40deg); opacity: 0; }
+  70% { transform: scale(1.2) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-8deg); }
+}
+
+.legend { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.legend li { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+.legend .stamp { width: 36px; }
+.legend small { color: var(--muted); display: block; }

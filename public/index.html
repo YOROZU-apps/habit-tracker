@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>習慣トラッカー</title>
+  <meta name="description" content="開くだけで1つ目の習慣クリア。カレンダーにスタンプが貯まっていく、やさしい習慣トラッカー。" />
+
+  <!-- SNSで共有したときのプレビュー（OGP）
+       og:url と og:image は、公開URLが決まったら https:// から始まる絶対URLに書き換える -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="習慣トラッカー" />
+  <meta property="og:description" content="開くだけで1つ目の習慣クリア。カレンダーにスタンプが貯まっていく、やさしい習慣トラッカー。" />
+  <meta property="og:image" content="ogp.png" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- ホーム画面に追加（PWA） -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#e07a3f" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="習慣トラッカー" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>習慣トラッカー</h1>
+      <p class="sub">アプリを開いたら、それだけで1つ目の習慣クリア！<br />小さな一歩の積み重ねで、あなたの習慣化をサポートします。</p>
+    </header>
+
+    <section id="demo-banner" class="card demo" hidden>
+      <strong>お試しモード中</strong>：サンプルの記録で体験できます。ここでの操作は保存されません。
+      <a href="./">お試しを終える</a>
+    </section>
+
+    <p id="storage-warning" class="card warning" hidden>
+      このブラウザではデータを保存できません（プライベートブラウズ中など）。閉じると記録が消えます。
+    </p>
+
+    <!-- ようこそ／おかえり／節目のお祝い -->
+    <section id="message" class="card message" hidden>
+      <button id="message-close" class="close" aria-label="閉じる">✕</button>
+      <p id="message-title" class="message-title"></p>
+      <blockquote id="message-quote" hidden>
+        <p id="message-quote-text"></p>
+        <p id="message-quote-note" class="quote-note"></p>
+        <cite id="message-quote-by"></cite>
+      </blockquote>
+    </section>
+
+    <section class="card streak">
+      <span id="streak-count" class="streak-num">0</span>
+      <span class="streak-label">日継続中</span>
+      <span class="streak-best">・ 最長 <span id="streak-best">0</span>日</span>
+    </section>
+
+    <section class="card">
+      <div class="day-head">
+        <h2><span id="day-title">今日の習慣</span> <span id="day-label" class="date"></span></h2>
+        <button id="back-today" class="link" hidden>今日に戻る</button>
+      </div>
+      <div class="day-stamp">
+        <span id="day-stamp"></span>
+        <span id="day-stamp-name"></span>
+      </div>
+      <p id="day-note" class="note" hidden></p>
+      <ul id="habit-list"></ul>
+      <form id="habit-form">
+        <input id="habit-input" placeholder="習慣を追加（例：読書10分）" maxlength="40" />
+        <button type="submit">追加</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="cal-head">
+        <button id="prev" aria-label="前の月">‹</button>
+        <h2 id="month-label"></h2>
+        <button id="next" aria-label="次の月">›</button>
+      </div>
+      <div class="weekdays">
+        <span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span>
+      </div>
+      <div id="calendar" class="calendar"></div>
+      <p id="month-summary" class="summary"></p>
+      <p class="hint">過去の日をタップすると、その日の習慣を編集できます。</p>
+    </section>
+
+    <section class="card">
+      <h2>スタンプの種類</h2>
+      <ul id="legend" class="legend"></ul>
+    </section>
+
+    <section id="data-section" class="card">
+      <h2>データ</h2>
+      <p class="hint">記録はこのブラウザの中だけに保存されます。ブラウザのデータを消すと記録も消えるので、ときどきバックアップしておくと安心です。</p>
+      <div class="data-actions">
+        <button id="export" type="button">バックアップを書き出す</button>
+        <button id="import" type="button">バックアップを読み込む</button>
+        <input id="import-file" type="file" accept="application/json,.json" hidden />
+      </div>
+      <p class="hint">はじめての方は <a href="?demo">お試しモード</a> で、スタンプやお祝いを体験できます。</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

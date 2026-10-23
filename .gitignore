@@ -1,0 +1,6 @@
+# 旧バージョンのデータ（個人の記録）
+data.json
+.DS_Store
+.claude/
+node_modules/
+.env
